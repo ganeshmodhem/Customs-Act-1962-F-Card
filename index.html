@@ -9,7 +9,7 @@
 header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:12px 14px 10px}.top{display:flex;align-items:center;gap:10px}.brand{font-size:24px;font-weight:800}.search{margin-top:10px;display:flex;gap:8px}.search input{flex:1;border:1px solid var(--line);border-radius:18px;padding:14px 16px;font-size:17px;outline:none}.btn{border:0;border-radius:15px;padding:12px 16px;font-weight:800;font-size:16px;background:#edf1f7;color:var(--ink)}.btn.primary{background:var(--blue);color:#fff}
 main{width:100%;max-width:none;margin:0 auto;padding:24px clamp(20px,3vw,56px)}.hero{background:linear-gradient(135deg,#1246ae,#2670dd);color:#fff;border-radius:28px;padding:34px 40px;margin-bottom:20px;box-shadow:0 12px 35px #165bd733}.hero h1{font-size:44px;line-height:1.05;margin:0 0 10px}.hero p{font-size:22px;margin:0 0 22px}.pills{display:flex;flex-wrap:wrap;gap:9px}.pill{background:#ffffff22;border:1px solid #ffffff33;border-radius:14px;padding:12px 16px;font-weight:700;font-size:17px}.controls{display:flex;gap:8px;margin-bottom:12px}.controls select{flex:1;border:1px solid var(--line);border-radius:15px;padding:13px;background:#fff;font-size:16px}.count{color:var(--muted);font-size:14px;margin:7px 2px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;margin:10px 0;padding:18px;box-shadow:0 2px 10px #00000008;cursor:pointer}.card h2{font-size:22px;line-height:1.18;margin:0 0 8px}.num{color:var(--blue)}.chapter{color:var(--muted);font-size:14px}.subchips{display:flex;flex-wrap:wrap;gap:5px}.subchip{font-size:12px;background:#eef3ff;color:#2457aa;padding:4px 7px;border-radius:8px}
-.detail{background:#fff;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 8px 28px #0000000a}.detailHead{padding:34px 40px;border-bottom:8px solid var(--blue)}.detailHead .small{color:var(--muted);font-weight:700}.detailHead h1{font-size:48px;line-height:1.12;margin:12px 0 20px}.progress{height:9px;background:#e7edf6;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--blue)}section.block{padding:30px 40px}.block h3{margin:0 0 10px;color:#657084;letter-spacing:.03em}.english{font-family:Georgia,"Times New Roman",serif;white-space:pre-wrap;font-size:21px;line-height:1.85;background:#fafbfd;border:1px solid var(--line);border-radius:18px;padding:18px}.marathi{font-size:22px;line-height:1.95;background:var(--mar);border:1px solid #eadcae;border-radius:18px;padding:18px;white-space:pre-wrap}.loading{color:#7b8492}.error{color:#a33;font-size:14px}.nav{position:sticky;bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:15px;background:#ffffffdd;backdrop-filter:blur(8px);padding:8px;border-radius:20px;box-shadow:0 6px 25px #0002}.nav .btn{min-height:56px}.hidden{display:none}.note{font-size:13px;color:var(--muted);line-height:1.5}
+.detail{background:#fff;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 8px 28px #0000000a}.detailHead{padding:38px clamp(28px,4vw,70px);border-bottom:8px solid var(--blue)}.detailHead .small{color:var(--muted);font-weight:700}.detailHead h1{font-size:48px;line-height:1.12;margin:12px 0 20px}.progress{height:9px;background:#e7edf6;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--blue)}section.block{padding:34px clamp(28px,4vw,70px)}.block h3{margin:0 0 14px;font-size:17px;color:#657084;letter-spacing:.03em}.english{font-family:Georgia,"Times New Roman",serif;white-space:pre-wrap;font-size:21px;line-height:1.85;background:#fafbfd;border:1px solid var(--line);border-radius:18px;padding:18px}.marathi{font-size:22px;line-height:1.95;background:var(--mar);border:1px solid #eadcae;border-radius:18px;padding:18px;white-space:pre-wrap}.loading{color:#7b8492}.error{color:#a33;font-size:14px}.nav{position:sticky;bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:15px;background:#ffffffdd;backdrop-filter:blur(8px);padding:8px;border-radius:20px;box-shadow:0 6px 25px #0002}.nav .btn{min-height:56px}.hidden{display:none}.note{font-size:13px;color:var(--muted);line-height:1.5}
 @media(min-width:900px){
   #list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
   #list .card{margin:0;min-height:150px}
@@ -38,28 +38,30 @@ main{width:100%;max-width:none;margin:0 auto;padding:24px clamp(20px,3vw,56px)}.
 @media (max-width: 1100px){#list{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width: 760px){#list{grid-template-columns:1fr}}
 
-.quickTab{margin:24px 40px 0;display:flex;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px}
-.tabBtn{border:1px solid var(--line);background:#f5f7fb;color:#263246;border-radius:14px;padding:12px 18px;font-weight:800;cursor:pointer}
-.tabBtn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.quickPanel{padding:26px 40px 34px;background:#f8fafc}
+
+.quickTab{margin:26px 40px 0;display:flex;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.tabBtn{border:1px solid var(--line);background:#f4f7fb;color:#3e4b61;border-radius:14px;padding:12px 18px;font-weight:900;font-size:16px;cursor:pointer;transition:.2s}
+.tabBtn.active{background:linear-gradient(135deg,#1458c7,#2b78e9);color:#fff;border-color:#1458c7;box-shadow:0 8px 18px #1458c72e}
+.quickPanel{padding:28px 40px 38px;background:linear-gradient(180deg,#f8fbff,#f4f7fb)}
 .quickPanel.hidden{display:none}
-.treeWrap{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;overflow:auto}
-.treeRoot{display:flex;justify-content:center;margin-bottom:24px}
-.treeRoot .treeNode{background:linear-gradient(135deg,#1257c9,#2878e8);color:#fff;min-width:280px;max-width:720px;text-align:center;border-radius:20px;padding:18px 24px;box-shadow:0 8px 24px #1257c92b}
-.treeRoot .treeNode .label{color:#dceaff}
-.treeLine{height:26px;width:2px;background:#b7c4d8;margin:0 auto}
-.treeBranches{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;position:relative}
-.treeBranches:before{content:"";position:absolute;top:-13px;left:10%;right:10%;height:2px;background:#b7c4d8}
-.treeNode{background:#f7f9fc;border:1px solid #dce3ee;border-radius:18px;padding:16px;min-height:92px;position:relative;box-shadow:0 4px 14px #00000008}
-.treeNode:before{content:"";position:absolute;top:-14px;left:50%;width:2px;height:14px;background:#b7c4d8}
-.treeNode .label{font-size:12px;font-weight:800;color:#68758a;margin-bottom:7px}
-.treeNode .value{font-size:17px;font-weight:800;line-height:1.35}
-.treeNode.sub{background:#fffdf4;border-color:#eadcae}
-.quickGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
-.quickCard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
-.quickCard h4{margin:0 0 8px;font-size:15px;color:#5d6a7d}.quickCard p{margin:0;line-height:1.65;font-size:16px}
+.treeWrap{background:#fff;border:1px solid #dfe6f0;border-radius:26px;padding:28px;overflow:auto;box-shadow:0 10px 30px #15233b0b}
+.treeTitle{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.treeTitle h2{margin:0;font-size:24px}.treeTitle span{font-size:13px;color:#69768a;font-weight:800}
+.treeRoot{display:flex;justify-content:center;margin-bottom:0}
+.treeRoot .treeNode{background:linear-gradient(135deg,#0d4fb8,#2878e8);color:#fff;min-width:340px;max-width:760px;text-align:center;border-radius:22px;padding:20px 26px;box-shadow:0 12px 28px #1257c933;position:relative}
+.treeRoot .treeNode:after{content:"";position:absolute;left:50%;bottom:-22px;width:3px;height:22px;background:#9db1cc;transform:translateX(-50%)}
+.treeRoot .treeNode .label{color:#dceaff}.treeRoot .treeNode .value{font-size:22px}
+.treeBranches{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;position:relative;padding-top:24px}
+.treeBranches:before{content:"";position:absolute;top:12px;left:8%;right:8%;height:3px;background:#aebed4;border-radius:99px}
+.treeNode{background:#f8fafc;border:1px solid #dce4ef;border-radius:18px;padding:17px;min-height:96px;position:relative;box-shadow:0 5px 16px #00000009}
+.treeNode:before{content:"";position:absolute;top:-15px;left:50%;width:3px;height:15px;background:#aebed4;transform:translateX(-50%)}
+.treeNode .label{font-size:12px;font-weight:900;color:#69778c;margin-bottom:7px}.treeNode .value{font-size:17px;font-weight:850;line-height:1.4}
+.treeNode.sub{background:#fffdf4;border-color:#eadcae}.treeNode.sub .value{color:#7a5c13}
+.quickGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
+.quickCard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 4px 14px #00000008}.quickCard h4{margin:0 0 8px;font-size:16px;color:#536177}.quickCard p{margin:0;line-height:1.7;font-size:16px}
+@media(min-width:1400px){.quickPanel{padding-left:60px;padding-right:60px}.quickGrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:900px){.quickPanel{padding:20px}.quickTab{margin:18px 20px 0}.quickGrid{grid-template-columns:1fr}.treeBranches{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.quickTab{margin:14px 14px 0}.treeBranches{grid-template-columns:1fr}.treeRoot .treeNode{min-width:0;width:100%}}
+@media(max-width:600px){.quickTab{margin:14px 14px 0}.treeBranches{grid-template-columns:1fr}.treeRoot .treeNode{min-width:0;width:100%}.treeRoot .treeNode .value{font-size:19px}}
 </style></head><body>
 <header><div class="top"><div class="brand">📘 Customs Act 1962</div><button class="btn" id="indexBtn">Index</button></div><div class="search"><input id="search" placeholder="Section / Sub-section search..."><button class="btn" id="clearBtn">Clear</button></div></header>
 <main>
@@ -96,9 +98,10 @@ function makeQuick(x){
   else if(/appeal/i.test(title)) focus='या कलमात अपीलशी संबंधित प्रक्रिया किंवा अधिकार स्पष्ट केले आहेत.';
   else if(/refund|recovery|duty/i.test(title)) focus='या कलमात शुल्क, परतावा किंवा वसुलीशी संबंधित तरतूद आहे.';
   else focus=clean(title)+' याबाबतची मुख्य कायदेशीर तरतूद.';
-  const nodes=sub.length?sub.map((n,i)=>`<div class="treeNode sub"><div class="label">उपकलम</div><div class="value">${esc(x.num)}(${esc(n)})</div></div>`).join(''):`<div class="treeNode sub"><div class="label">मुख्य तरतूद</div><div class="value">उपकलम स्वतंत्रपणे दिलेले नाही</div></div>`;
-  const exam= sub.length ? `परीक्षेसाठी: ${esc(x.num)} अंतर्गत ${sub.length} उपकलमे नोंदलेली आहेत.` : `परीक्षेसाठी: कलम ${esc(x.num)} चे शीर्षक आणि मुख्य विषय लक्षात ठेवा.`;
-  $('quickContent').innerHTML=`<div class="treeWrap"><div class="treeRoot"><div class="treeNode"><div class="label">कलम ${esc(x.num)} • अध्याय ${esc(x.chapter)}</div><div class="value">${esc(title)}</div></div></div><div class="treeLine"></div><div class="treeBranches"><div class="treeNode"><div class="label">मुख्य कल्पना</div><div class="value">${esc(focus)}</div></div>${nodes}</div><div class="quickGrid"><div class="quickCard"><h4>🧠 लक्षात ठेवण्याची युक्ती</h4><p>कलम क्रमांक → मुख्य विषय → उपकलमांची रचना असा क्रम लक्षात ठेवा.</p></div><div class="quickCard"><h4>📌 परीक्षेचा मुद्दा</h4><p>${exam}</p></div><div class="quickCard"><h4>📖 पूर्ण अभ्यास</h4><p>खालील “संपूर्ण कलम” मध्ये मूळ मजकूर आणि त्याचा संपूर्ण मराठी अर्थ पहा.</p></div></div></div>`;
+  const nodes=sub.length?sub.map((n)=>`<div class="treeNode sub"><div class="label">उपकलम</div><div class="value">कलम ${esc(x.num)}(${esc(n)})</div></div>`).join(''):`<div class="treeNode sub"><div class="label">रचना</div><div class="value">स्वतंत्र उपकलम नमूद नाही</div></div>`;
+  const structure=sub.length?`या कलमात ${sub.length} उपकलमे नोंदलेली आहेत.`:`या कलमात स्वतंत्र उपकलम नोंदलेले नाही.`;
+  const exam=sub.length?`परीक्षेत कलम ${esc(x.num)} सोबत त्याची उपकलम क्रमांकही लक्षात ठेवा.`:`परीक्षेसाठी कलम ${esc(x.num)} चे शीर्षक आणि मुख्य तरतूद लक्षात ठेवा.`;
+  $('quickContent').innerHTML=`<div class="treeWrap"><div class="treeTitle"><h2>🌳 झटपट पुनरावलोकन</h2><span>कलम ${esc(x.num)} • अध्याय ${esc(x.chapter)}</span></div><div class="treeRoot"><div class="treeNode"><div class="label">मुख्य कलम</div><div class="value">${esc(title)}</div></div></div><div class="treeBranches"><div class="treeNode"><div class="label">मुख्य विषय</div><div class="value">${esc(focus)}</div></div>${nodes}</div><div class="quickGrid"><div class="quickCard"><h4>🧠 लक्षात ठेवण्याची पद्धत</h4><p>कलम क्रमांक → मुख्य विषय → उपकलमांची रचना असा क्रम वापरून जलद पुनरावृत्ती करा.</p></div><div class="quickCard"><h4>📌 परीक्षेचा मुद्दा</h4><p>${exam}</p></div><div class="quickCard"><h4>🔎 रचना</h4><p>${structure}</p></div><div class="quickCard"><h4>📖 पूर्ण अभ्यास</h4><p>“संपूर्ण कलम” निवडल्यावर मूळ मजकूर आणि उपलब्ध संपूर्ण मराठी अर्थ पाहता येईल.</p></div></div></div>`;
 }
 function showQuick(){ $('quickPanel').classList.remove('hidden'); $('fullPanel').classList.add('hidden'); $('tabQuick').classList.add('active'); $('tabFull').classList.remove('active'); }
 function showFull(){ $('quickPanel').classList.add('hidden'); $('fullPanel').classList.remove('hidden'); $('tabQuick').classList.remove('active'); $('tabFull').classList.add('active'); }
