@@ -62,6 +62,8 @@ main{width:100%;max-width:none;margin:0 auto;padding:24px clamp(20px,3vw,56px)}.
 @media(min-width:1400px){.quickPanel{padding-left:60px;padding-right:60px}.quickGrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:900px){.quickPanel{padding:20px}.quickTab{margin:18px 20px 0}.quickGrid{grid-template-columns:1fr}.treeBranches{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.quickTab{margin:14px 14px 0}.treeBranches{grid-template-columns:1fr}.treeRoot .treeNode{min-width:0;width:100%}.treeRoot .treeNode .value{font-size:19px}}
+
+.sourceQuick .treeNode .mrValue{margin-top:9px;color:#1d3557;font-weight:650;line-height:1.65}.sourceList{margin:0;padding-left:22px}.sourceList li{margin:8px 0;line-height:1.65;font-size:15px}.sourceQuick .quickCard{min-height:150px}.sourceQuick .treeTitle p{margin:5px 0 0;color:#64748b}.sourceQuick .value{line-height:1.5}
 </style></head><body>
 <header><div class="top"><div class="brand">📘 Customs Act 1962</div><button class="btn" id="indexBtn">Index</button></div><div class="search"><input id="search" placeholder="Section / Sub-section search..."><button class="btn" id="clearBtn">Clear</button></div></header>
 <main>
@@ -83,25 +85,67 @@ async function translateChunk(s){const url='https://translate.googleapis.com/tra
 function splitText(s,max=1800){const out=[];let rest=s;while(rest.length>max){let cut=rest.lastIndexOf('\n',max);if(cut<700)cut=rest.lastIndexOf('. ',max);if(cut<700)cut=max;out.push(rest.slice(0,cut+1));rest=rest.slice(cut+1)}if(rest)out.push(rest);return out}
 async function translateFull(s){$('marathi').innerHTML='<span class="loading">संपूर्ण मजकुराचा मराठी अर्थ तयार होत आहे…</span>';try{const parts=splitText(s);let result='';for(const p of parts){result+=await translateChunk(p)+'\n';$('marathi').textContent=result} }catch(e){$('marathi').innerHTML='<span class="error">मराठी भाषांतर मिळवता आले नाही. इंटरनेट जोडणी तपासा आणि पुन्हा प्रयत्न करा.</span>'}}
 
+function mrTitle(title){
+  const dict=[
+    ['Short title, extent and commencement','संक्षिप्त नाव, विस्तार आणि प्रारंभ'],
+    ['Definitions','व्याख्या'],['Classes of officers of customs','सीमाशुल्क अधिकाऱ्यांचे वर्ग'],
+    ['Appointment of officers of customs','सीमाशुल्क अधिकाऱ्यांची नियुक्ती'],['Powers of officers of customs','सीमाशुल्क अधिकाऱ्यांचे अधिकार'],
+    ['Entrustment of functions of Board and customs officers on certain other officers','मंडळाची व सीमाशुल्क अधिकाऱ्यांची कार्ये इतर अधिकाऱ्यांकडे सोपविणे'],
+    ['Appointment of customs ports, airports, etc','सीमाशुल्क बंदरे, विमानतळ इत्यादींची नियुक्ती'],
+    ['Power to approve landing places and specify limits of customs area','उतरण्याची ठिकाणे मंजूर करणे आणि सीमाशुल्क क्षेत्राच्या सीमा निश्चित करण्याचा अधिकार'],
+    ['Power to prohibit importation or exportation of goods','मालाची आयात किंवा निर्यात प्रतिबंधित करण्याचा अधिकार'],
+    ['Persons possessing notified goods to intimate the place of storage, etc','अधिसूचित माल बाळगणाऱ्या व्यक्तींनी साठवणुकीचे ठिकाण कळविणे'],
+    ['Precautions to be taken by persons acquiring notified goods','अधिसूचित माल संपादन करणाऱ्या व्यक्तींनी घ्यावयाची खबरदारी'],
+    ['Persons possessing notified goods to maintain accounts','अधिसूचित माल बाळगणाऱ्या व्यक्तींनी हिशेब ठेवणे'],
+    ['Sale, etc., of notified goods to be evidenced by vouchers','अधिसूचित मालाच्या विक्रीचा पुरावा पावत्यांनी ठेवणे'],
+    ['Seizure of goods, documents and things','माल, कागदपत्रे आणि वस्तू जप्त करणे'],
+    ['Power to summon persons to give evidence and produce documents and things','साक्ष देण्यासाठी आणि कागदपत्रे व वस्तू सादर करण्यासाठी व्यक्तींना पाचारण करण्याचा अधिकार'],
+    ['Search of premises','जागेची झडती'],['Arrest of persons','व्यक्तींना अटक'],['Search of persons','व्यक्तींची झडती'],
+    ['Confiscation of goods','मालाची जप्ती'],['Penalty','दंड'],['Appeals','अपील'],['Refund','परतावा'],
+    ['Assessment of duty','शुल्कनिर्धारण'],['Provisional assessment of duty','शुल्काचे तात्पुरते निर्धारण'],
+    ['Recovery of duties','शुल्काची वसुली'],['Interest on delayed payment of duty','शुल्क उशिरा भरल्यावरील व्याज'],
+    ['Power to grant exemption from duty','शुल्कातून सूट देण्याचा अधिकार'],['Dutiable goods','शुल्कपात्र माल'],
+    ['Valuation of goods','मालाचे मूल्यनिर्धारण'],['Date for determination of rate of duty','शुल्कदर निश्चित करण्याची तारीख'],
+    ['Clearance of imported goods and export goods','आयात माल आणि निर्यात मालाची मंजुरी'],
+    ['Baggage','सामान'],['Postal articles','टपाल वस्तू']
+  ];
+  for(const [a,b] of dict) if(title===a) return b;
+  return title.replace(/\betc\.?/gi,'इत्यादी').replace(/and/gi,'आणि').replace(/of/gi,'चे').replace(/to/gi,'करणे').replace(/Power/gi,'अधिकार').replace(/goods/gi,'माल').replace(/officers/gi,'अधिकारी').replace(/customs/gi,'सीमाशुल्क').replace(/persons/gi,'व्यक्ती').replace(/documents/gi,'कागदपत्रे').replace(/things/gi,'वस्तू');
+}
+function extractFacts(x){
+  const t=x.english||'';
+  const nums=[];
+  const seen=new Set();
+  const patterns=[/\b\d+(?:\.\d+)?\s*(?:months?|years?|days?|hours?|weeks?)\b/gi,/₹\s?[\d,]+(?:\.\d+)?/g,/\bsection\s+\d+[A-Za-z-]*/gi,/\bsub-section\s*\([^)]+\)/gi];
+  for(const re of patterns){for(const m of t.matchAll(re)){const v=m[0].replace(/\s+/g,' ').trim(); if(!seen.has(v)){seen.add(v);nums.push(v)}}}
+  const sentences=t.split(/(?<=[.!?])\s+(?=\[?\(?\d)/).map(s=>s.trim()).filter(Boolean);
+  const key=[]; for(const s of sentences){ if(s.length>35 && !/^\d+\.\s*$/ .test(s)){key.push(s.replace(/\s+/g,' ').slice(0,240));} if(key.length>=3) break; }
+  return {nums,key};
+}
 function makeQuick(x){
-  const sub=x.subsections||[];
-  const title=x.title||'';
-  const clean=t=>t.replace(/\s+/g,' ').trim();
-  const lower=title.toLowerCase();
-  let focus='या कलमाचा मुख्य विषय';
-  if(/definition/i.test(title)) focus='या कलमात कायद्यात वापरल्या जाणाऱ्या संज्ञांची व्याख्या दिली आहे.';
-  else if(/power|powers/i.test(title)) focus='या कलमात संबंधित अधिकार कोणाला आणि कोणत्या प्रकारे दिले आहेत हे स्पष्ट केले आहे.';
-  else if(/appointment/i.test(title)) focus='या कलमात नियुक्ती किंवा नेमणुकीशी संबंधित तरतूद स्पष्ट केली आहे.';
-  else if(/assessment/i.test(title)) focus='या कलमात शुल्कनिर्धारणाशी संबंधित प्रक्रिया किंवा अधिकार स्पष्ट केले आहेत.';
-  else if(/prohibition|prohibit/i.test(title)) focus='या कलमात आयात किंवा निर्यातीवरील प्रतिबंधाची तरतूद आहे.';
-  else if(/penalty|punishment|confiscation/i.test(title)) focus='या कलमात दंडात्मक किंवा जप्तीशी संबंधित तरतूद आहे.';
-  else if(/appeal/i.test(title)) focus='या कलमात अपीलशी संबंधित प्रक्रिया किंवा अधिकार स्पष्ट केले आहेत.';
-  else if(/refund|recovery|duty/i.test(title)) focus='या कलमात शुल्क, परतावा किंवा वसुलीशी संबंधित तरतूद आहे.';
-  else focus=clean(title)+' याबाबतची मुख्य कायदेशीर तरतूद.';
-  const nodes=sub.length?sub.map((n)=>`<div class="treeNode sub"><div class="label">उपकलम</div><div class="value">कलम ${esc(x.num)}(${esc(n)})</div></div>`).join(''):`<div class="treeNode sub"><div class="label">रचना</div><div class="value">स्वतंत्र उपकलम नमूद नाही</div></div>`;
-  const structure=sub.length?`या कलमात ${sub.length} उपकलमे नोंदलेली आहेत.`:`या कलमात स्वतंत्र उपकलम नोंदलेले नाही.`;
-  const exam=sub.length?`परीक्षेत कलम ${esc(x.num)} सोबत त्याची उपकलम क्रमांकही लक्षात ठेवा.`:`परीक्षेसाठी कलम ${esc(x.num)} चे शीर्षक आणि मुख्य तरतूद लक्षात ठेवा.`;
-  $('quickContent').innerHTML=`<div class="treeWrap"><div class="treeTitle"><h2>🌳 झटपट पुनरावलोकन</h2><span>कलम ${esc(x.num)} • अध्याय ${esc(x.chapter)}</span></div><div class="treeRoot"><div class="treeNode"><div class="label">मुख्य कलम</div><div class="value">${esc(title)}</div></div></div><div class="treeBranches"><div class="treeNode"><div class="label">मुख्य विषय</div><div class="value">${esc(focus)}</div></div>${nodes}</div><div class="quickGrid"><div class="quickCard"><h4>🧠 लक्षात ठेवण्याची पद्धत</h4><p>कलम क्रमांक → मुख्य विषय → उपकलमांची रचना असा क्रम वापरून जलद पुनरावृत्ती करा.</p></div><div class="quickCard"><h4>📌 परीक्षेचा मुद्दा</h4><p>${exam}</p></div><div class="quickCard"><h4>🔎 रचना</h4><p>${structure}</p></div><div class="quickCard"><h4>📖 पूर्ण अभ्यास</h4><p>“संपूर्ण कलम” निवडल्यावर मूळ मजकूर आणि उपलब्ध संपूर्ण मराठी अर्थ पाहता येईल.</p></div></div></div>`;
+  const sub=x.subsections||[]; const title=x.title||''; const facts=extractFacts(x); const mt=mrTitle(title);
+  const action=/seizure|search|arrest|confisc|penalty|prohibit|appoint|approve|notify|intimate|maintain|deliver|submit|produce|summon|assessment|refund|recovery|exempt|valuation|clearance|release|export|import/i.test(title);
+  const branch1=`कलम ${x.num} मध्ये “${mt}” याबाबतची मुख्य तरतूद आहे.`;
+  const branch2=sub.length?`या कलमात ${sub.length} उपकलमे नोंदलेली आहेत: ${sub.map(s=>'कलम '+x.num+'('+s+')').join(', ')}.`:'या कलमासाठी स्वतंत्र उपकलम क्रमांक नोंदलेला नाही.';
+  const branch3=facts.nums.length?`मूळ मजकुरात नमूद संदर्भ: ${facts.nums.slice(0,12).join(' • ')}`:'मूळ मजकुरात विशेष संख्यात्मक संदर्भ आढळला नाही.';
+  const branch4=action?`या कलमातील कृती, अधिकार किंवा कर्तव्य मूळ मजकुरातील तरतुदीनुसार समजून घ्या.`:'या कलमाची मुख्य तरतूद मूळ मजकुरानुसार वाचा.';
+  const keyPoints=facts.key.length?facts.key.map((s,i)=>`<li><b>${i+1}.</b> ${esc(s)}</li>`).join(''):'<li>मूळ मजकुरातून मुख्य वाक्य उपलब्ध नाही.</li>';
+  $('quickContent').innerHTML=`<div class="treeWrap sourceQuick">
+    <div class="treeTitle"><div><h2>🌳 झटपट पुनरावलोकन</h2><p>मूळ पीडीएफमधील मजकुरावर आधारित संक्षिप्त रचना</p></div><span>कलम ${esc(x.num)} • अध्याय ${esc(x.chapter)}</span></div>
+    <div class="treeRoot"><div class="treeNode"><div class="label">मुख्य कलम</div><div class="value">${esc(title)}</div><div class="mrValue">${esc(mt)}</div></div></div>
+    <div class="treeBranches">
+      <div class="treeNode"><div class="label">मुख्य विषय</div><div class="value mrValue">${esc(branch1)}</div></div>
+      <div class="treeNode"><div class="label">उपकलमे</div><div class="value mrValue">${esc(branch2)}</div></div>
+      <div class="treeNode"><div class="label">संख्यात्मक / कायदेशीर संदर्भ</div><div class="value mrValue">${esc(branch3)}</div></div>
+      <div class="treeNode"><div class="label">काय लक्षात ठेवायचे?</div><div class="value mrValue">${esc(branch4)}</div></div>
+    </div>
+    <div class="quickGrid">
+      <div class="quickCard"><h4>📌 मूळ मजकुरातील मुख्य मुद्दे</h4><ul class="sourceList">${keyPoints}</ul></div>
+      <div class="quickCard"><h4>🧠 परीक्षेसाठी स्मरणरचना</h4><p class="mrValue">कलम क्रमांक → मुख्य विषय → उपकलमे → अटी / अपवाद → संख्यात्मक संदर्भ असा क्रम लक्षात ठेवा.</p></div>
+      <div class="quickCard"><h4>🔎 उपकलम तपासणी</h4><p class="mrValue">${esc(branch2)}</p></div>
+      <div class="quickCard"><h4>📖 पूर्ण अभ्यास</h4><p class="mrValue">खालील “संपूर्ण कलम” मध्ये पीडीएफमधील पूर्ण मूळ मजकूर पाहा. कोणताही भाग गाळलेला नाही.</p></div>
+    </div>
+  </div>`;
 }
 function showQuick(){ $('quickPanel').classList.remove('hidden'); $('fullPanel').classList.add('hidden'); $('tabQuick').classList.add('active'); $('tabFull').classList.remove('active'); }
 function showFull(){ $('quickPanel').classList.add('hidden'); $('fullPanel').classList.remove('hidden'); $('tabQuick').classList.remove('active'); $('tabFull').classList.add('active'); }
